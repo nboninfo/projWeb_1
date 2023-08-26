@@ -1,12 +1,55 @@
 <!DOCTYPE html>
 <html lang="pt_PT">
+
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meu Primeiro Projecto em Python com Flask</title>
+    <title>Cotizador de Libros</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-    <h1>Olá Mundo!</h1>
-    <p>Bemvindo a meu site com Flask</p>
+
+    <div class="container mt-5">
+        <div class="row">
+            <form id="frmPesquisar">
+                <div class="col-md-8">
+                    <input type="text" class="form-control" id="titulo" placeholder="Introduz tua pesquisa aqui...">
+                </div>
+                <div class="col-md-4">
+                    <button type="submit" class="btn btn-primary">Pesquisar</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="row mt-5">
+            <div class="col-md-12">
+                <div id="resultados">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"
+        integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(() => {
+            $('#frmPesquisar').submit((e) => {
+                e.preventDefault();
+
+                const titulo = $('#titulo').val();
+
+                $.post('/pesquisar', { title: titulo }, (response) => {
+                    console.log(response);
+                });
+            });
+        });
+    </script>
 </body>
+
 </html>
