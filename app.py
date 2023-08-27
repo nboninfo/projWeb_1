@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, render_template, request
+from selenium import webdriver
 
 app = Flask(__name__)
 
@@ -16,3 +17,7 @@ def pesquisar():
         'id': 1,
     }
     return jsonify(dados)
+
+def criar_driver():
+    driver = webdriver.Firefox()
+    return driver
