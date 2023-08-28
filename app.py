@@ -11,10 +11,13 @@ def index():
 @app.route('/pesquisar', methods=['POST'])
 def pesquisar():
     titulo = request.form.get('title')
+
+    driver = criar_driver()
+
     dados = {
         'status': 'ok',
         'tirulo': titulo,
-        'id': 1,
+        'pesq-centesima': livraria_centesima(driver),
     }
     return jsonify(dados)
 
