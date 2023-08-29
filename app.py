@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, render_template, request
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 
 app = Flask(__name__)
 
@@ -17,8 +18,8 @@ def pesquisar():
 
     dados = {
         'status': 'ok',
-        'tirulo': titulo,
-        'pesq-centesima': livraria_centesima(driver),
+        'titulo': titulo,
+        'pesq-centesima': livraria_centesima(driver, titulo)
     }
     return jsonify(dados)
 
@@ -30,9 +31,9 @@ def livraria_centesima(driver, titulo):
     driver.get('https://centesima.com/')
 
     # Encontra el input da pesquisa
-    pesquisa = driver.find_element_by_name('Pesquisa')
+    pesquisa = driver.find_element(By.ID,"pesquisa-texto1")
     pesquisa.send_keys(titulo)
-    pesquisa.send_keys(keys.ENTER)
+    pesquisa.send_keys(Keys.ENTER)
 
     return driver.page_source
 
