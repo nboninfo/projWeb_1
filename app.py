@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, render_template, request
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 
 app = Flask(__name__)
 
@@ -25,9 +26,14 @@ def criar_driver():
     driver = webdriver.Firefox()
     return driver
 
-def livraria_centesima(driver):
+def livraria_centesima(driver, titulo):
     driver.get('https://centesima.com/')
-    
+
+    # Encontra el input da pesquisa
+    pesquisa = driver.find_element_by_name('Pesquisa')
+    pesquisa.send_keys(titulo)
+    pesquisa.send_keys(keys.ENTER)
+
     return driver.page_source
 
 '''
